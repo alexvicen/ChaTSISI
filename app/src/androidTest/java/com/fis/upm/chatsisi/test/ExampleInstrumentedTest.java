@@ -1,4 +1,4 @@
-package com.fis.upm.chatsisi;
+package com.fis.upm.chatsisi.test;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

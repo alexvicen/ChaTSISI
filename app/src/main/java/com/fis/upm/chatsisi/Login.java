@@ -1,5 +1,6 @@
 package com.fis.upm.chatsisi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,5 +10,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        Intent i = new Intent(this,Inicio.class);
+        startActivity(i);
+        finish();
     }
 }

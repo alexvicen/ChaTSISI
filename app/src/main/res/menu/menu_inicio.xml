@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/agendas"
+            android:icon="@drawable/ic_agenda"
+            android:title="@string/agendas"
+            />
+        <item
+            android:id="@+id/chats"
+            android:icon="@drawable/ic_chat"
+            android:title="@string/chats"
+            />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/perfil"
+                android:icon="@drawable/ic_perfil_blanco"
+                android:title="@string/mi_perfil" />
+            <item
+                android:id="@+id/cerrar_sesion"
+                android:icon="@drawable/ic_cerrar_sesion"
+                android:title="@string/cerrar_sesion" />
+        </menu>
+    </item>
+
+</menu>
