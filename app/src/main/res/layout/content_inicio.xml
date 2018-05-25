@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.fis.upm.chatsisi.Inicio"
+    tools:context="com.fis.upm.chatsisi.nucleo.Inicio"
     tools:showIn="@layout/inicio">
 
 

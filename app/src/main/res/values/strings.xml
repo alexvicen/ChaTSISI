@@ -6,5 +6,15 @@
     <string name="mi_perfil">Mi Perfil</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="usuario">Usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="contraseña_olvidada">He olvidado la contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="crear_cuenta">No tengo cuenta</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="correo">Correo UPM</string>
+    <string name="repetir_contraseña">Repetir Contraseña</string>
+    <string name="crear_nueva_cuenta">Crear cuenta</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.fis.upm.chatsisi;
+package com.fis.upm.chatsisi.fragments;
 
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.fis.upm.chatsisi.R;
 
 public class FragmentPerfil extends Fragment {
     private View vista;

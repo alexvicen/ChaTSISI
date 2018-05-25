@@ -1,4 +1,4 @@
-package com.fis.upm.chatsisi;
+package com.fis.upm.chatsisi.nucleo;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -14,9 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.fis.upm.chatsisi.R;
+import com.fis.upm.chatsisi.fragments.FragmentPerfil;
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private RelativeLayout cuerpo;
@@ -68,9 +70,8 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     @Override
     public void onBackPressed() {
         if (fragmentClass!=null){
-            cuerpo.removeAllViews();
             fragmentClass=null;
-            recreate();
+            getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag("perfil")).commit();
         }else{
             super.onBackPressed();
         }
@@ -80,7 +81,11 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.fab){
+            if (toolbar.getTitle().toString().equals("Mis Agendas")){
 
+            }else if (toolbar.getTitle().toString().equals("Mis Chats")){
+
+            }
         }
     }
     private void inicializarVariables(){
@@ -104,7 +109,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             fragment = (Fragment) fragmentClass.newInstance();
             fragment.setArguments(arguments);
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.cuerpo, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.cuerpo, fragment,"perfil").commit();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
-            android:screenOrientation="portrait">
+            android:name=".nucleo.Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,10 +20,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Inicio"
+            android:name=".nucleo.Inicio"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".FragmentPerfil"></activity>
+        <activity android:name=".nucleo.CrearUsuario"></activity>
     </application>
 
 </manifest>
