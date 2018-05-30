@@ -12,8 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fis.upm.chatsisi.R;
+import com.fis.upm.chatsisi.SharedPreferences.GestorSharedPreferences;
 import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.nucleo.Inicio;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
 
@@ -28,6 +32,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         inicializarVariables();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = GestorSharedPreferences.getJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (!jsonObject.toString().equals("{}")){
+            Intent i = new Intent(this,Inicio.class);
+            startActivity(i);
+            finish();
+        }
     }
     private void inicializarVariables(){
         //BUTTON
@@ -50,7 +65,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             if (!etUsuario.getText().toString().trim().equals("")||!etContraseña.getText().toString().trim().equals("")){
                 try {
                     if (UsuarioDAO.validarUsuario(this,etUsuario.getText().toString(),etContraseña.getText().toString())!=null){
-
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("id",UsuarioDAO.validarUsuario(this,etUsuario.getText().toString(),etContraseña.getText().toString()).getId_usuario());
+                            GestorSharedPreferences.setJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this),jsonObject);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Intent i = new Intent(this,Inicio.class);
+                        startActivity(i);
+                        finish();
                     }else{
                         sacarDialogo("Usuario o contraseña incorrectos","");
                     }
@@ -61,10 +85,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 sacarDialogo("Rellene los campos","");
             }
 
-
-            Intent i = new Intent(this,Inicio.class);
-            startActivity(i);
-            finish();
         }else if (view.getId()==R.id.txtRecordar){
 
         }else if (view.getId()==R.id.txtCrearCuenta){

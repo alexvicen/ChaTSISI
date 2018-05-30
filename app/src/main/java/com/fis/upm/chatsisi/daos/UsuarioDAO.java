@@ -88,7 +88,7 @@ public class UsuarioDAO extends DBHelperMOS {
 	}
 	public static Usuario validarUsuario(Context context, String nombre,String contrasena) throws SQLException {
 		cargarDao(context);
-		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.ALIAS_USUARIO,nombre).or().eq(Usuario.CORREO_USUARIO,nombre).and().eq(Usuario.CONTRASENA_USUARIO,contrasena).query();
+		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.ALIAS_USUARIO,nombre).and().eq(Usuario.CONTRASENA_USUARIO,contrasena).query();
 		if(listadoUsuario.isEmpty()) {
 			return null;
 		}else{

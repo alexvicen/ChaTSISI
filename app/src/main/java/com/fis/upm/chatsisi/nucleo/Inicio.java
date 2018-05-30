@@ -1,5 +1,6 @@
 package com.fis.upm.chatsisi.nucleo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -18,7 +19,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.fis.upm.chatsisi.R;
+import com.fis.upm.chatsisi.SharedPreferences.GestorSharedPreferences;
+import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.fragments.FragmentPerfil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private RelativeLayout cuerpo;
@@ -62,6 +68,10 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         } else if (id == R.id.perfil) {
             irPerfil(8);//PONER AQUI EL ID DEL USUARIO AL QUE VAS A ACCEDER AL PERFIL
         } else if (id == R.id.cerrar_sesion) {
+            GestorSharedPreferences.clearSharedPreferencesUsuario(this);
+            Intent i = new Intent(this,Login.class);
+            startActivity(i);
+            finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
