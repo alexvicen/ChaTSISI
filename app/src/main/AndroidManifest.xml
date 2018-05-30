@@ -23,7 +23,9 @@
             android:name=".nucleo.Inicio"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".nucleo.CrearUsuario"></activity>
+        <activity android:name=".nucleo.CrearUsuario"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"/>
     </application>
 
 </manifest>

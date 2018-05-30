@@ -8,13 +8,28 @@
     tools:context=".nucleo.CrearUsuario">
 
     <EditText
+        android:id="@+id/etNombreUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/edit_texts"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/nombre_usaurio"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_texts"
         android:ems="10"
         android:gravity="center"
@@ -61,7 +76,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textAlignment="center" />
 
     <EditText
@@ -75,7 +90,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/repetir_contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textAlignment="center" />
 
     <Button
@@ -84,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="@drawable/botones"
-        android:text="@string/crear_nueva_cuenta" />
+        android:text="@string/crear_nueva_cuenta"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

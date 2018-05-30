@@ -1,5 +1,7 @@
 package com.fis.upm.chatsisi.nucleo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fis.upm.chatsisi.R;
+import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.nucleo.Inicio;
+
+import java.sql.SQLException;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,13 +47,46 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.btnLogin){
+            if (!etUsuario.getText().toString().trim().equals("")||!etContraseña.getText().toString().trim().equals("")){
+                try {
+                    if (UsuarioDAO.validarUsuario(this,etUsuario.getText().toString(),etContraseña.getText().toString())!=null){
+
+                    }else{
+                        sacarDialogo("Usuario o contraseña incorrectos","");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                sacarDialogo("Rellene los campos","");
+            }
+
+
             Intent i = new Intent(this,Inicio.class);
             startActivity(i);
             finish();
         }else if (view.getId()==R.id.txtRecordar){
 
         }else if (view.getId()==R.id.txtCrearCuenta){
-
+            Intent i = new Intent(this,CrearUsuario.class);
+            startActivity(i);
+            finish();
         }
+    }
+    private void sacarDialogo(String titulo,String texto){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle(titulo);
+        builder1.setMessage(texto);
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "Aceptar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.setCanceledOnTouchOutside(false);
+        alert11.show();
     }
 }

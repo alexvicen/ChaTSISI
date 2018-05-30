@@ -58,8 +58,7 @@
             android:gravity="center"
             android:hint="@string/contraseña"
             android:inputType="textPassword"
-            android:textAlignment="center"
-            android:textColor="#555" />
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/txtRecordar"
@@ -95,7 +94,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/botones"
             android:text="@string/entrar"
-            android:textColor="#ffffff" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </LinearLayout>

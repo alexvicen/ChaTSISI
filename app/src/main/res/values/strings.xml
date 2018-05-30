@@ -16,5 +16,6 @@
     <string name="correo">Correo UPM</string>
     <string name="repetir_contraseña">Repetir Contraseña</string>
     <string name="crear_nueva_cuenta">Crear cuenta</string>
+    <string name="nombre_usaurio">Nombre usuario</string>
 
 </resources>
