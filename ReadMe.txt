@@ -1,4 +1,4 @@
-Practica de Fundamentos de ingeniera del software para la UPM, un chat "funcional" 
+Practica dse Fundamentos de ingeniera del software para la UPM, un chat "funcional" 
 Enunciado:
 El plazo máximo para realizar la tercera entrega de la práctica obligatoria se indicará en la tarea
 de Moodle correspondiente. En esta entrega se deberán realizar las siguientes actividades:
