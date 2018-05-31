@@ -10,8 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fis.upm.chatsisi.R;
+import com.fis.upm.chatsisi.SharedPreferences.GestorSharedPreferences;
 import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.entities.Usuario;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,7 +60,7 @@ public class CrearUsuario extends AppCompatActivity implements View.OnClickListe
             } else if (etContraseña.getText().toString().trim().equals(etContraseña2.getText().toString().trim())){
                 try {
                     if (UsuarioDAO.buscarUsuarioPorNombreCorreo(this,etNombreUsuario.getText().toString().trim(), etCorreo.getText().toString().trim())==null){
-                        if (UsuarioDAO.newUsuario(this,
+                        Usuario usu = UsuarioDAO.newUsuarioRet(this,
                                 etNombreUsuario.getText().toString().trim(),
                                 etContraseña.getText().toString().trim(),
                                 etNombre.getText().toString().trim(),
@@ -64,30 +68,17 @@ public class CrearUsuario extends AppCompatActivity implements View.OnClickListe
                                 etCorreo.getText().toString().trim(),
                                 "",
                                 "",
-                                "")){
+                                "");
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("id",usu.getId_usuario());
+                                GestorSharedPreferences.setJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this),jsonObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             Intent i = new Intent(this,Inicio.class);
                             startActivity(i);
                             finish();
-                        }else{
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                            builder1.setTitle("Es imposible crear el usuario en estos momentos.");
-                            builder1.setMessage("Por favor intentelo mas tarde.");
-                            builder1.setCancelable(true);
-                            builder1.setPositiveButton(
-                                    "Aceptar",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                            Intent i = new Intent(CrearUsuario.this,Login.class);
-                                            startActivity(i);
-                                            finish();
-                                        }
-                                    });
-                            AlertDialog alert11 = builder1.create();
-                            alert11.setCanceledOnTouchOutside(false);
-                            alert11.show();
-
-                        }
                     }else{
                         String titulo="Ya existe otro usuario con ese nombre o ese correo.";
                         String texto="(Si no te acuerdas de la contraseña puedes recordarla desde la pantalla anterior)";

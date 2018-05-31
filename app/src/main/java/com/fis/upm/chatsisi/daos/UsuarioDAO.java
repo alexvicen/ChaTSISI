@@ -20,11 +20,17 @@ public class UsuarioDAO extends DBHelperMOS {
 	//__________FUNCIONES DE CREACIÓN________________________//
 
 	public static boolean newUsuario(Context context,String login_usuario, String contrasena_usuario, String nombre_usuario, String apellidos_usuario,
-									 String correo_usuario, String alias_usuario, String estado_usuario, String descripcion_usuario) {
+									 String correo_usuario, String estado_usuario, String descripcion_usuario) {
 		Usuario t = montarUsuario(login_usuario, contrasena_usuario, nombre_usuario, apellidos_usuario,
-									correo_usuario, alias_usuario, estado_usuario, descripcion_usuario);
+									correo_usuario, estado_usuario, descripcion_usuario);
 		return crearUsuario(t,context);
-}
+	}
+	public static Usuario newUsuarioRet(Context context,String login_usuario, String contrasena_usuario, String nombre_usuario, String apellidos_usuario,
+									 String correo_usuario, String estado_usuario, String descripcion_usuario) {
+		Usuario t = montarUsuario(login_usuario, contrasena_usuario, nombre_usuario, apellidos_usuario,
+									correo_usuario, estado_usuario, descripcion_usuario);
+		return crearUsuarioRet(t,context);
+	}
 	public static boolean crearUsuario(Usuario t,Context context) {
 		try {
 			cargarDao(context);
@@ -35,10 +41,20 @@ public class UsuarioDAO extends DBHelperMOS {
 			return false;
 		}
 	}
+	public static Usuario crearUsuarioRet(Usuario t,Context context) {
+		try {
+			cargarDao(context);
+			dao.create(t);
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public static Usuario montarUsuario(String login_usuario, String contrasena_usuario, String nombre_usuario, String apellidos_usuario,
-										String correo_usuario, String alias_usuario, String estado_usuario, String descripcion_usuario) {
+										String correo_usuario, String estado_usuario, String descripcion_usuario) {
 		Usuario u =new Usuario(login_usuario, contrasena_usuario, nombre_usuario, apellidos_usuario,
-				correo_usuario, alias_usuario, estado_usuario, descripcion_usuario);
+				correo_usuario, estado_usuario, descripcion_usuario);
 		return u;
 	}
 
@@ -79,7 +95,7 @@ public class UsuarioDAO extends DBHelperMOS {
 	}
 	public static Usuario buscarUsuarioPorNombreCorreo(Context context, String nombre,String correo) throws SQLException {
 		cargarDao(context);
-		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.ALIAS_USUARIO,nombre).or().eq(Usuario.CORREO_USUARIO,correo).query();
+		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.LOGIN_USUARIO,nombre).or().eq(Usuario.CORREO_USUARIO,correo).query();
 		if(listadoUsuario.isEmpty()) {
 			return null;
 		}else{
@@ -88,7 +104,7 @@ public class UsuarioDAO extends DBHelperMOS {
 	}
 	public static Usuario validarUsuario(Context context, String nombre,String contrasena) throws SQLException {
 		cargarDao(context);
-		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.ALIAS_USUARIO,nombre).and().eq(Usuario.CONTRASENA_USUARIO,contrasena).query();
+		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.LOGIN_USUARIO,nombre).or().eq(Usuario.CORREO_USUARIO,nombre).and().eq(Usuario.CONTRASENA_USUARIO,contrasena).query();
 		if(listadoUsuario.isEmpty()) {
 			return null;
 		}else{

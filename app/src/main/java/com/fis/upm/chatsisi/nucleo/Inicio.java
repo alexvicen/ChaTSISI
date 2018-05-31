@@ -30,9 +30,9 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     private RelativeLayout cuerpo;
     private Class fragmentClass;
     private  Toolbar toolbar;
-    private ListView lvGeneral;
     private ArrayAdapter arrayAdapter;
     private FloatingActionButton fab;
+    private int idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,13 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = GestorSharedPreferences.getJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this));
+            idUsuario = jsonObject.getInt("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         inicializarVariables();
         darValorVariables();
     }
@@ -56,17 +63,11 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.agendas) {
-            toolbar.setTitle("Mis Agendas");
-            String[] array = { "FIS","Matematicas","LXXSPXVRES" };
-            arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
-            lvGeneral.setAdapter(arrayAdapter);
+
         } else if (id == R.id.chats) {
-            toolbar.setTitle("Mis Chats");
-            String[] array = { "Javier","Adrian","Miguel","Restituta" };
-            arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
-            lvGeneral.setAdapter(arrayAdapter);
+
         } else if (id == R.id.perfil) {
-            irPerfil(8);//PONER AQUI EL ID DEL USUARIO AL QUE VAS A ACCEDER AL PERFIL
+            irPerfil(idUsuario);
         } else if (id == R.id.cerrar_sesion) {
             GestorSharedPreferences.clearSharedPreferencesUsuario(this);
             Intent i = new Intent(this,Login.class);
@@ -102,12 +103,9 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
         cuerpo = findViewById(R.id.cuerpo);
-        lvGeneral = findViewById(R.id.lvGeneral);
     }
     private void darValorVariables(){
-        String[] array = { "FIS","Matematicas","LXXSPXVRES" };
-        arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
-        lvGeneral.setAdapter(arrayAdapter);
+
     }
     public void irPerfil(int id){
         cuerpo.removeAllViews();

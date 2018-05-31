@@ -3,7 +3,7 @@ package com.fis.upm.chatsisi.entities;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "usaurios")
+@DatabaseTable(tableName = "usuarios")
 public class Usuario {
 
     public static final String ID_USUARIO = "_id_usuario";
@@ -12,7 +12,6 @@ public class Usuario {
     public static final String NOMBRE_USUARIO = "nombre_usuario";
     public static final String APELLIDOS_USUARIO = "apellidos_usuario";
     public static final String CORREO_USUARIO = "correo_usuario";
-    public static final String ALIAS_USUARIO = "alias_usuario";
     public static final String ESTADO_USUARIO = "estado_usuario";
     public static final String DESCRIPCION_USUARIO = "descripcion_usuario";
 
@@ -22,19 +21,17 @@ public class Usuario {
     @DatabaseField(columnName = NOMBRE_USUARIO)     private String nombre_usuario;
     @DatabaseField(columnName = APELLIDOS_USUARIO)     private String apellidos_usuario;
     @DatabaseField(columnName = CORREO_USUARIO)     private String correo_usuario;
-    @DatabaseField(columnName = ALIAS_USUARIO)          private String alias_usuario;
     @DatabaseField(columnName = ESTADO_USUARIO)         private String estado_usuario;
     @DatabaseField(columnName = DESCRIPCION_USUARIO)    private String descripcion_usuario;
 
     public Usuario(){}
     public Usuario(String login_usuario, String contrasena_usuario, String nombre_usuario, String apellidos_usuario,
-                   String correo_usuario, String alias_usuario, String estado_usuario, String descripcion_usuario) {
+                   String correo_usuario, String estado_usuario, String descripcion_usuario) {
         this.login_usuario = login_usuario;
         this.contrasena_usuario = contrasena_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellidos_usuario = apellidos_usuario;
         this.correo_usuario = correo_usuario;
-        this.alias_usuario = alias_usuario;
         this.estado_usuario = estado_usuario;
         this.descripcion_usuario = descripcion_usuario;
     }
@@ -71,12 +68,6 @@ public class Usuario {
     }
     public void setCorreo_usuario(String correo_usuario) {
         this.correo_usuario = correo_usuario;
-    }
-    public String getAlias_usuario() {
-        return alias_usuario;
-    }
-    public void setAlias_usuario(String alias_usuario) {
-        this.alias_usuario = alias_usuario;
     }
     public String getEstado_usuario() {
         return estado_usuario;

@@ -17,30 +17,44 @@
         android:padding="10dp"
         android:transitionName="llRow">
 
-        <TextView
-            android:id="@+id/txtAlias"
+        <EditText
+            android:id="@+id/etAlias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="alias"
-            android:textColor="@android:color/black"
-            android:textSize="28sp" />
+            android:ems="10"
+            android:hint="@string/alias"
+            android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/txtEstado"
+        <EditText
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="estado" />
+            android:ems="10"
+            android:hint="@string/nombre"
+            android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/txtDescripcion"
+        <EditText
+            android:id="@+id/etApellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="descripcion"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:ems="10"
+            android:hint="@string/apellidos"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/estado"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/descripcion"
+            android:inputType="textPersonName" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
