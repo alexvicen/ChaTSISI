@@ -1,5 +1,6 @@
 package com.fis.upm.chatsisi.fragments;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,7 +33,8 @@ public class FragmentPerfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_perfil, container, false);
         inicializarVariables();
-        id = getArguments().getInt("id");
+        Bundle args = getArguments();
+        id = Integer.parseInt(args.getString("id"));
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = GestorSharedPreferences.getJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(getContext()));

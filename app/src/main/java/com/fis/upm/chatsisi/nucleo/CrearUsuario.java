@@ -67,7 +67,6 @@ public class CrearUsuario extends AppCompatActivity implements View.OnClickListe
                                 etApellidos.getText().toString().trim(),
                                 etCorreo.getText().toString().trim(),
                                 "",
-                                "",
                                 "");
                             JSONObject jsonObject = new JSONObject();
                             try {

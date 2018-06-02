@@ -73,6 +73,15 @@ public class AgendaDAO extends DBHelperMOS {
 			return listadoAgenda.get(0);
 		}
 	}
+	public static Agenda buscarAgendaPorNombre(Context context, String nombre) throws SQLException {
+		cargarDao(context);
+		List<Agenda> listadoAgenda= dao.queryForEq(Agenda.NOMBRE_AGENDA, nombre);
+		if(listadoAgenda.isEmpty()) {
+			return null;
+		}else{
+			return listadoAgenda.get(0);
+		}
+	}
 
 
 	//____________________________FUNCIONES DE ACTUALIZAR_________________________________________//

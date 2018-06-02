@@ -20,5 +20,13 @@
     <string name="alias">Alias</string>
     <string name="estado">Estado</string>
     <string name="descripcion">Descripcion</string>
+    <string name="error_hoja_id">error_hoja_id</string>
+    <string name="error_local">error_local</string>
+    <string name="error_ubicacion">error_ubicacion</string>
+    <string name="error_cargo">error_cargo</string>
+    <string name="error_oficina">error_oficina</string>
+    <string name="error_ambiente">error_ambiente</string>
+    <string name="error_area">error_area</string>
+    <string name="nombre_agenda">Nombre agenda</string>
 
 </resources>

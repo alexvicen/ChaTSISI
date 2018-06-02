@@ -19,7 +19,7 @@ public abstract class GestorSharedPreferences {
     }
 
     public static JSONObject getJsonUsuario(SharedPreferences sharedPreferences) throws JSONException {
-        String s = sharedPreferences.getString("usaurio", "{}");
+        String s = sharedPreferences.getString("usuario", "{}");
         return new JSONObject(s);
     }
 

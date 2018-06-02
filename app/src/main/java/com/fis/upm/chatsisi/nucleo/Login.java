@@ -68,7 +68,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (view.getId()==R.id.btnLogin){
             if (!etUsuario.getText().toString().trim().equals("")||!etContraseña.getText().toString().trim().equals("")){
                 try {
-                    List<Usuario> u = UsuarioDAO.buscarTodosLosUsuarios(this);
                     if (UsuarioDAO.validarUsuario(this,etUsuario.getText().toString(),etContraseña.getText().toString())!=null){
                         JSONObject jsonObject = new JSONObject();
                         try {

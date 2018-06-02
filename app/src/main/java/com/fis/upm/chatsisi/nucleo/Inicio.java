@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +22,7 @@ import android.widget.RelativeLayout;
 import com.fis.upm.chatsisi.R;
 import com.fis.upm.chatsisi.SharedPreferences.GestorSharedPreferences;
 import com.fis.upm.chatsisi.daos.UsuarioDAO;
+import com.fis.upm.chatsisi.fragments.FragmentAnadirAgenda;
 import com.fis.upm.chatsisi.fragments.FragmentPerfil;
 
 import org.json.JSONException;
@@ -63,7 +65,6 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.agendas) {
-
         } else if (id == R.id.chats) {
 
         } else if (id == R.id.perfil) {
@@ -92,11 +93,16 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.fab){
-            if (toolbar.getTitle().toString().equals("Mis Agendas")){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentAnadirAgenda newFragment = new FragmentAnadirAgenda();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.add(android.R.id.content, newFragment, "FullScreenFragment").commit();
+            /*if (toolbar.getTitle().toString().equals("Mis Agendas")){
 
             }else if (toolbar.getTitle().toString().equals("Mis Chats")){
 
-            }
+            }*/
         }
     }
     private void inicializarVariables(){
