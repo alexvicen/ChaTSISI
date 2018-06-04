@@ -30,4 +30,27 @@ public abstract class GestorSharedPreferences {
         spe.commit();
     }
     //<---------------------------------------------------------------------------------->
+    // <---------------------------------------------------------------------------------->
+    public static SharedPreferences getSharedPreferencesTipo(Context context) {
+        return context.getSharedPreferences("spTipo", context.MODE_PRIVATE);
+    }
+
+    public static void setJsonTipo(SharedPreferences sharedPreferences, JSONObject jsonObject) {
+        SharedPreferences.Editor spe = sharedPreferences.edit();
+        spe.putString("tipo", jsonObject.toString());
+        spe.commit();
+    }
+
+    public static JSONObject getJsonTipo(SharedPreferences sharedPreferences) throws JSONException {
+        String s = sharedPreferences.getString("tipo", "{}");
+        return new JSONObject(s);
+    }
+
+    public static void clearSharedPreferencesTipo(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferencesTipo(context);
+        SharedPreferences.Editor spe = sharedPreferences.edit();
+        spe.clear();
+        spe.commit();
+    }
+    //<---------------------------------------------------------------------------------->
 }

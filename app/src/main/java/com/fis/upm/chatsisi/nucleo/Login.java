@@ -36,6 +36,33 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         inicializarVariables();
+        try {
+            if (UsuarioDAO.buscarTodosLosUsuarios(this)!=null&&UsuarioDAO.buscarTodosLosUsuarios(this).size()<2){
+                UsuarioDAO.newUsuario(this,"javi","a","Javier",
+                        "Borreguero","j.borreguero@alumnos.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"alvaro","a","Alvaro",
+                        "Calzado","a.cperez@alumnso.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"hiubert","a","Alberto",
+                        "Marcos","a.marcos@alumnos.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"yoel","a","Yoel",
+                        "Castillo","y.castillo@alumnos.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"gomez","a","Carlos",
+                        "Gomez","c.gomez@alumnos.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"victor","a","Victor",
+                        "Diaz","v.diaz@alumnos.upm.es","","");
+
+                UsuarioDAO.newUsuario(this,"rodrigo","a","Rodrigo",
+                        "Martinez","r.martinez@alumnos.upm.es","","");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = GestorSharedPreferences.getJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this));
@@ -73,6 +100,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         try {
                             jsonObject.put("id",UsuarioDAO.validarUsuario(this,etUsuario.getText().toString(),etContraseña.getText().toString()).getId_usuario());
                             GestorSharedPreferences.setJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(this),jsonObject);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        JSONObject jsonObject1 = new JSONObject();
+                        try {
+                            jsonObject1.put("tipo",1);
+                            GestorSharedPreferences.setJsonTipo(GestorSharedPreferences.getSharedPreferencesTipo(this),jsonObject1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

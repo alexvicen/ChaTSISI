@@ -5,10 +5,12 @@ import android.content.Context;
 import com.fis.upm.chatsisi.daos.AgendaDAO;
 import com.fis.upm.chatsisi.daos.AgendaUsuarioDAO;
 import com.fis.upm.chatsisi.daos.ChatDAO;
+import com.fis.upm.chatsisi.daos.MensajeDAO;
 import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.entities.Agenda;
 import com.fis.upm.chatsisi.entities.AgendaUsuario;
 import com.fis.upm.chatsisi.entities.Chat;
+import com.fis.upm.chatsisi.entities.Mensaje;
 import com.fis.upm.chatsisi.entities.Usuario;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -25,12 +27,14 @@ public class BBDDConstantes {
 	public static Dao<Agenda, Integer> agendaDao;
 	public static Dao<Chat, Integer> chatDao;
 	public static Dao<AgendaUsuario, Integer> agendaUsuarioDao;
+	public static Dao<Mensaje, Integer> mensajeDao;
 
     public static void cerrarDao() {
 		usuarioDao = null;
 		agendaDao = null;
 		chatDao = null;
 		agendaUsuarioDao = null;
+		mensajeDao = null;
 
 	}
 
@@ -39,6 +43,7 @@ public class BBDDConstantes {
 		TableUtils.createTable(connectionSource, Agenda.class);
 		TableUtils.createTable(connectionSource, Chat.class);
 		TableUtils.createTable(connectionSource, AgendaUsuario.class);
+		TableUtils.createTable(connectionSource, Mensaje.class);
 
 	}
 
@@ -47,6 +52,7 @@ public class BBDDConstantes {
 		TableUtils.dropTable(connectionSource, Agenda.class, true);
 		TableUtils.dropTable(connectionSource, Chat.class, true);
 		TableUtils.dropTable(connectionSource, AgendaUsuario.class, true);
+		TableUtils.dropTable(connectionSource, Mensaje.class, true);
 
 	}
 
@@ -55,5 +61,6 @@ public class BBDDConstantes {
 		AgendaDAO.borrarTodosLosAgendas(context);
 		ChatDAO.borrarTodosLosChats(context);
 		AgendaUsuarioDAO.borrarTodosLosAgendaUsuarios(context);
+		MensajeDAO.borrarTodosLosMensajes(context);
     }
 }

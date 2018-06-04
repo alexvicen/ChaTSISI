@@ -7,6 +7,7 @@ import com.fis.upm.chatsisi.constants.BBDDConstantes;
 import com.fis.upm.chatsisi.entities.Agenda;
 import com.fis.upm.chatsisi.entities.AgendaUsuario;
 import com.fis.upm.chatsisi.entities.Chat;
+import com.fis.upm.chatsisi.entities.Mensaje;
 import com.fis.upm.chatsisi.entities.Usuario;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -70,5 +71,11 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 			BBDDConstantes.agendaUsuarioDao = getDao(AgendaUsuario.class);
 		}
 		return BBDDConstantes.agendaUsuarioDao;
+	}
+	public Dao<Mensaje, Integer> getMensajeDAO() throws SQLException {
+		if (BBDDConstantes.mensajeDao == null) {
+			BBDDConstantes.mensajeDao = getDao(Mensaje.class);
+		}
+		return BBDDConstantes.mensajeDao;
 	}
 }

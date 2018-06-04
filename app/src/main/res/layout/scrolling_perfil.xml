@@ -17,13 +17,25 @@
         android:padding="10dp"
         android:transitionName="llRow">
 
-        <EditText
-            android:id="@+id/etAlias"
+        <TextView
+            android:id="@+id/txtAlias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/alias"
-            android:inputType="textPersonName" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/etNombre"

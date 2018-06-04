@@ -25,6 +25,10 @@ public class ChatDAO extends DBHelperMOS {
 		Chat t = montarChat(fecha_inicio, fk_usaurio_envia, fk_usaurio_recibe);
 		return crearChat(t,context);
 	}
+	public static Chat newChatRet(Context context,String fecha_inicio, int fk_usaurio_envia, int fk_usaurio_recibe) {
+		Chat t = montarChat(fecha_inicio, fk_usaurio_envia, fk_usaurio_recibe);
+		return crearChatRet(t,context);
+	}
 	public static boolean crearChat(Chat t,Context context) {
 		try {
 			cargarDao(context);
@@ -33,6 +37,16 @@ public class ChatDAO extends DBHelperMOS {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public static Chat crearChatRet(Chat t,Context context) {
+		try {
+			cargarDao(context);
+			dao.create(t);
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	public static Chat montarChat(String fecha_inicio, int fk_usaurio_envia, int fk_usaurio_recibe) {
@@ -69,6 +83,24 @@ public class ChatDAO extends DBHelperMOS {
 	public static Chat buscarChatPorId(Context context, int id) throws SQLException {
 		cargarDao(context);
 		List<Chat> listadoChat= dao.queryForEq(Chat.ID_CHAT, id);
+		if(listadoChat.isEmpty()) {
+			return null;
+		}else{
+			return listadoChat.get(0);
+		}
+	}
+	public static List<Chat> buscarChatPorFkUsuario(Context context, int id) throws SQLException {
+		cargarDao(context);
+		List<Chat> listadoChat= dao.queryBuilder().where().eq(Chat.FK_USUARIO_ENVIA,id).query();
+		if(listadoChat.isEmpty()) {
+			return null;
+		}else{
+			return listadoChat;
+		}
+	}
+	public static Chat buscarChatPorFkEnvioFkRecibe(Context context, int envia, int recibe) throws SQLException {
+		cargarDao(context);
+		List<Chat> listadoChat= dao.queryBuilder().where().eq(Chat.FK_USUARIO_ENVIA,envia).and().eq(Chat.FK_USUARIO_RECIBE,recibe).query();
 		if(listadoChat.isEmpty()) {
 			return null;
 		}else{

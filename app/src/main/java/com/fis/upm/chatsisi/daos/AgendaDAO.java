@@ -19,9 +19,13 @@ public class AgendaDAO extends DBHelperMOS {
 
 	//__________FUNCIONES DE CREACIÓN________________________//
 
-	public static boolean newAgenda(Context context,String nombre_agenda) {
-		Agenda t = montarAgenda(nombre_agenda);
+	public static boolean newAgenda(Context context,String nombre_agenda,int fk_usuario,boolean b_favorita) {
+		Agenda t = montarAgenda(nombre_agenda, fk_usuario,b_favorita);
 		return crearAgenda(t,context);
+	}
+	public static Agenda newAgendaRet(Context context,String nombre_agenda,int fk_usuario,boolean b_favorita) {
+		Agenda t = montarAgenda(nombre_agenda, fk_usuario,b_favorita);
+		return crearAgendaRet(t,context);
 	}
 	public static boolean crearAgenda(Agenda t,Context context) {
 		try {
@@ -33,8 +37,18 @@ public class AgendaDAO extends DBHelperMOS {
 			return false;
 		}
 	}
-	public static Agenda montarAgenda(String nombre_agenda) {
-		Agenda u =new Agenda(nombre_agenda);
+	public static Agenda crearAgendaRet(Agenda t,Context context) {
+		try {
+			cargarDao(context);
+			dao.create(t);
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static Agenda montarAgenda(String nombre_agenda,int fk_usuario,boolean b_favorita) {
+		Agenda u =new Agenda(nombre_agenda, fk_usuario,b_favorita);
 		return u;
 	}
 
@@ -58,6 +72,15 @@ public class AgendaDAO extends DBHelperMOS {
 	public static List<Agenda> buscarTodosLosAgendas(Context context) throws SQLException {
 		cargarDao(context);
 		List<Agenda> listadoAgenda= dao.queryForAll();
+		if(listadoAgenda.isEmpty()) {
+			return null;
+		}else{
+			return listadoAgenda;
+		}
+	}
+	public static List<Agenda> buscarAgendaPorFkUsuario(Context context,int id) throws SQLException {
+		cargarDao(context);
+		List<Agenda> listadoAgenda= dao.queryBuilder().where().eq(Agenda.FK_USUARIO,id).query();
 		if(listadoAgenda.isEmpty()) {
 			return null;
 		}else{

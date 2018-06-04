@@ -6,8 +6,10 @@ import com.fis.upm.chatsisi.dbhelper.DBHelperMOS;
 import com.fis.upm.chatsisi.entities.Usuario;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO extends DBHelperMOS {
@@ -102,6 +104,24 @@ public class UsuarioDAO extends DBHelperMOS {
 			return listadoUsuario.get(0);
 		}
 	}
+	public static Usuario buscarUsuarioPorLogin(Context context, String nombre) throws SQLException {
+		cargarDao(context);
+		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.LOGIN_USUARIO,nombre).query();
+		if(listadoUsuario.isEmpty()) {
+			return null;
+		}else{
+			return listadoUsuario.get(0);
+		}
+	}
+	public static List<Usuario> buscarTodosLosUsuariosMenosId(Context context, int id) throws SQLException {
+		cargarDao(context);
+		List<Usuario> listadoUsuario= dao.queryBuilder().where().not().eq(Usuario.ID_USUARIO,id).query();
+		if(listadoUsuario.isEmpty()) {
+			return null;
+		}else{
+			return listadoUsuario;
+		}
+	}
 	public static Usuario validarUsuario(Context context, String nombre,String contrasena) throws SQLException {
 		cargarDao(context);
 		List<Usuario> listadoUsuario= dao.queryBuilder().where().eq(Usuario.LOGIN_USUARIO,nombre).or().eq(Usuario.CORREO_USUARIO,nombre).and().eq(Usuario.CONTRASENA_USUARIO,contrasena).query();
@@ -111,10 +131,45 @@ public class UsuarioDAO extends DBHelperMOS {
 			return listadoUsuario.get(0);
 		}
 	}
-
+	public static List<Usuario> buscarUsuariosPorIds(Context context, ArrayList<Integer> ids) throws SQLException {
+		cargarDao(context);
+		List<Usuario> listadoUsuario = dao.queryBuilder().where().in(Usuario.ID_USUARIO,ids).query();
+		if (listadoUsuario.isEmpty()) {
+			return null;
+		} else {
+			return listadoUsuario;
+		}
+	}
 
 	//____________________________FUNCIONES DE ACTUALIZAR_________________________________________//
 
-
+	public static void actualizarNombre(Context context, String nombre, int id) throws SQLException {
+		cargarDao(context);
+		UpdateBuilder<Usuario, Integer> updateBuilder = dao.updateBuilder();
+		updateBuilder.where().eq(Usuario.ID_USUARIO,id);
+		updateBuilder.updateColumnValue(Usuario.NOMBRE_USUARIO,nombre);
+		updateBuilder.update();
+	}
+	public static void actualizarApellidos(Context context, String nombre, int id) throws SQLException {
+		cargarDao(context);
+		UpdateBuilder<Usuario, Integer> updateBuilder = dao.updateBuilder();
+		updateBuilder.where().eq(Usuario.ID_USUARIO,id);
+		updateBuilder.updateColumnValue(Usuario.APELLIDOS_USUARIO,nombre);
+		updateBuilder.update();
+	}
+	public static void actualizarEstado(Context context, String nombre, int id) throws SQLException {
+		cargarDao(context);
+		UpdateBuilder<Usuario, Integer> updateBuilder = dao.updateBuilder();
+		updateBuilder.where().eq(Usuario.ID_USUARIO,id);
+		updateBuilder.updateColumnValue(Usuario.ESTADO_USUARIO,nombre);
+		updateBuilder.update();
+	}
+	public static void actualizarDescripcion(Context context, String nombre, int id) throws SQLException {
+		cargarDao(context);
+		UpdateBuilder<Usuario, Integer> updateBuilder = dao.updateBuilder();
+		updateBuilder.where().eq(Usuario.ID_USUARIO,id);
+		updateBuilder.updateColumnValue(Usuario.DESCRIPCION_USUARIO,nombre);
+		updateBuilder.update();
+	}
 
 }

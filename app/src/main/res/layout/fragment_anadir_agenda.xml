@@ -29,8 +29,9 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/llCuerpo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1000dp"
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
@@ -44,7 +45,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/nombre_agenda"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

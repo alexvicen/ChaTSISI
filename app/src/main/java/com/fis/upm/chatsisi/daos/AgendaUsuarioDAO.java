@@ -74,6 +74,15 @@ public class AgendaUsuarioDAO extends DBHelperMOS {
 			return listadoAgendaUsuario.get(0);
 		}
 	}
+	public static List<AgendaUsuario> buscarAgendaUsuarioPorFkAgenda(Context context, int id) throws SQLException {
+		cargarDao(context);
+		List<AgendaUsuario> listadoAgendaUsuario= dao.queryForEq(AgendaUsuario.FK_AGENDA, id);
+		if(listadoAgendaUsuario.isEmpty()) {
+			return null;
+		}else{
+			return listadoAgendaUsuario;
+		}
+	}
 
 
 	//____________________________FUNCIONES DE ACTUALIZAR_________________________________________//
