@@ -75,6 +75,13 @@ public class CrearUsuario extends AppCompatActivity implements View.OnClickListe
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        JSONObject jsonObject1 = new JSONObject();
+                        try {
+                            jsonObject1.put("tipo", 1);
+                            GestorSharedPreferences.setJsonTipo(GestorSharedPreferences.getSharedPreferencesTipo(this), jsonObject1);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                             Intent i = new Intent(this,Inicio.class);
                             startActivity(i);
                             finish();

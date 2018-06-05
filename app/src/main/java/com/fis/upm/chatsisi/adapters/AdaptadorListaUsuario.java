@@ -71,7 +71,7 @@ public class AdaptadorListaUsuario extends ArrayAdapter implements View.OnClickL
             ((Inicio)context).irPerfil(Integer.parseInt(String.valueOf(v.getTag())));
         }else if(v.getId()==R.id.btnChat){
             try {
-                if (ChatDAO.buscarChatPorFkEnvioFkRecibe(context,idUsuario,Integer.parseInt(String.valueOf(v.getTag())))!=null){
+                if (ChatDAO.buscarChatPorFkEnvioFkRecibe(context,idUsuario,Integer.parseInt(String.valueOf(v.getTag())))!=null||ChatDAO.buscarChatPorFkEnvioFkRecibe(context,Integer.parseInt(String.valueOf(v.getTag())),idUsuario)!=null){
                     ((Inicio)context).irChat(Integer.parseInt(String.valueOf(v.getTag())));
                 }else{
                     String fecha = CommonMethods.getCurrentDate();

@@ -39,7 +39,6 @@ public class FragmentChat extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chat, container, false);
         inicializarVariables();
-        // ----Set autoscroll of listview when a new message arrives----//
         msgListView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         msgListView.setStackFromBottom(true);
         JSONObject jsonObject = new JSONObject();
@@ -48,7 +47,12 @@ public class FragmentChat extends Fragment implements OnClickListener {
             idUsuario = jsonObject.getInt("id");
             Bundle args = getArguments();
             idRecibe = args.getInt("id");
-            chat = ChatDAO.buscarChatPorFkEnvioFkRecibe(getContext(),idUsuario,idRecibe);
+            if (ChatDAO.buscarChatPorFkEnvioFkRecibe(getContext(),idUsuario,idRecibe)!=null){
+                chat = ChatDAO.buscarChatPorFkEnvioFkRecibe(getContext(),idUsuario,idRecibe);
+            }else{
+                chat = ChatDAO.buscarChatPorFkEnvioFkRecibe(getContext(),idRecibe,idUsuario);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (SQLException e) {

@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.login);
         inicializarVariables();
         try {
-            if (UsuarioDAO.buscarTodosLosUsuarios(this)!=null&&UsuarioDAO.buscarTodosLosUsuarios(this).size()<2){
+            if (UsuarioDAO.buscarTodosLosUsuarios(this)==null||UsuarioDAO.buscarTodosLosUsuarios(this).size()<2){
                 UsuarioDAO.newUsuario(this,"javi","a","Javier",
                         "Borreguero","j.borreguero@alumnos.upm.es","","");
 

@@ -36,7 +36,7 @@ public class FragmentPerfil extends Fragment {
         vista = inflater.inflate(R.layout.fragment_perfil, container, false);
         inicializarVariables();
         Bundle args = getArguments();
-        id = Integer.parseInt(args.getString("id"));
+        id = args.getInt("id");
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = GestorSharedPreferences.getJsonUsuario(GestorSharedPreferences.getSharedPreferencesUsuario(getContext()));

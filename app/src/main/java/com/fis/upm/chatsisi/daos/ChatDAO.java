@@ -89,9 +89,18 @@ public class ChatDAO extends DBHelperMOS {
 			return listadoChat.get(0);
 		}
 	}
-	public static List<Chat> buscarChatPorFkUsuario(Context context, int id) throws SQLException {
+	public static List<Chat> buscarChatPorFkUsuarioEnvia(Context context, int id) throws SQLException {
 		cargarDao(context);
-		List<Chat> listadoChat= dao.queryBuilder().where().eq(Chat.FK_USUARIO_ENVIA,id).query();
+		List<Chat> listadoChat= dao.queryBuilder().where().eq(Chat.FK_USUARIO_ENVIA,id).or().eq(Chat.FK_USUARIO_RECIBE,id).query();
+		if(listadoChat.isEmpty()) {
+			return null;
+		}else{
+			return listadoChat;
+		}
+	}
+	public static List<Chat> buscarChatPorFkUsuarioRecibe(Context context, int id) throws SQLException {
+		cargarDao(context);
+		List<Chat> listadoChat= dao.queryBuilder().where().eq(Chat.FK_USUARIO_RECIBE,id).query();
 		if(listadoChat.isEmpty()) {
 			return null;
 		}else{

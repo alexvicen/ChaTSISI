@@ -50,7 +50,7 @@ public class FragmentAnadirAgenda extends DialogFragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_anadir_agenda, container, false);
-        String title = "FullScreen";
+        String title = "Nueva Agenda";
         Toolbar toolbar = (Toolbar) vista.findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);

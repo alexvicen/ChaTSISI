@@ -30,6 +30,7 @@ import com.fis.upm.chatsisi.daos.ChatDAO;
 import com.fis.upm.chatsisi.daos.UsuarioDAO;
 import com.fis.upm.chatsisi.entities.Agenda;
 import com.fis.upm.chatsisi.entities.Chat;
+import com.fis.upm.chatsisi.entities.Usuario;
 import com.fis.upm.chatsisi.fragments.FragmentAgenda;
 import com.fis.upm.chatsisi.fragments.FragmentChat;
 import com.fis.upm.chatsisi.fragments.FragmentAnadirAgenda;
@@ -189,8 +190,6 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     transaction.add(android.R.id.content, fragment).commit();
-                } else if (toolbar.getTitle().toString().equals("Mis Chats")) {
-
                 }
             } catch (InstantiationException e) {
                 e.printStackTrace();
@@ -220,17 +219,28 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
 
     public void rellenarListChat(Context context, int id) {
         try {
-            if (ChatDAO.buscarChatPorFkUsuario(context, id) != null) {
-                nombres.clear();
+            nombres.clear();
+            if (ChatDAO.buscarChatPorFkUsuarioEnvia(context, id) != null) {
+
                 ArrayList<Chat> chats = new ArrayList<>();
-                chats.addAll(ChatDAO.buscarChatPorFkUsuario(context, id));
+                chats.addAll(ChatDAO.buscarChatPorFkUsuarioEnvia(context, id));
                 nombres = new ArrayList<>();
                 for (int i = 0; i < chats.size(); i++) {
                     nombres.add(UsuarioDAO.buscarUsuarioPorId(context, chats.get(i).getFk_usuario_recibe()).getLogin_usuario());
                 }
-                ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, nombres);
-                lvGeneral.setAdapter(itemsAdapter);
             }
+            if (ChatDAO.buscarChatPorFkUsuarioRecibe(context, id) != null) {
+                ArrayList<Chat> chats = new ArrayList<>();
+                chats.addAll(ChatDAO.buscarChatPorFkUsuarioRecibe(context, id));
+                nombres = new ArrayList<>();
+                for (int i = 0; i < chats.size(); i++) {
+                    nombres.add(UsuarioDAO.buscarUsuarioPorId(context, chats.get(i).getFk_usuario_envia()).getLogin_usuario());
+                }
+
+            }
+
+            ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, nombres);
+            lvGeneral.setAdapter(itemsAdapter);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -249,9 +259,15 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     public void irPerfil(int id) {
+        try {
+            Usuario usuario = UsuarioDAO.buscarUsuarioPorId(this,id);
+            toolbar.setTitle(usuario.getNombre_usuario()+" "+usuario.getApellidos_usuario());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         cuerpo.removeAllViews();
         Bundle arguments = new Bundle();
-        arguments.putString("id", String.valueOf(id));
+        arguments.putInt("id", id);
         fragmentClass = FragmentPerfil.class;
         Fragment fragment;
         try {
@@ -267,6 +283,12 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     public void irChat(int id) {
+        try {
+            Usuario u = UsuarioDAO.buscarUsuarioPorId(this,id);
+            toolbar.setTitle(u.getLogin_usuario());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         fab.setVisibility(View.GONE);
         cuerpo.removeAllViews();
         Bundle arguments = new Bundle();
@@ -309,12 +331,14 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         if (toolbar.getTitle().toString().equals("Mis Agendas")) {
             try {
                 irAgenda(AgendaDAO.buscarAgendaPorNombre(this, nombres.get(i)).getId_agenda());
+                toolbar.setTitle(nombres.get(i));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else if (toolbar.getTitle().toString().equals("Mis Chats")) {
             try {
                 irChat(UsuarioDAO.buscarUsuarioPorLogin(this, nombres.get(i)).getId_usuario());
+                toolbar.setTitle(nombres.get(i));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
