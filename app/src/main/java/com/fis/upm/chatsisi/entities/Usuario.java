@@ -27,6 +27,7 @@ public class Usuario {
     public Usuario(){}
     public Usuario(String login_usuario, String contrasena_usuario, String nombre_usuario, String apellidos_usuario,
                    String correo_usuario, String estado_usuario, String descripcion_usuario) {
+
         this.login_usuario = login_usuario;
         this.contrasena_usuario = contrasena_usuario;
         this.nombre_usuario = nombre_usuario;
